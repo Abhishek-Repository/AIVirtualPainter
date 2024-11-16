@@ -7,10 +7,10 @@ This project introduces a contactless virtual drawing tool controlled by hand ge
 ## Requirements
 
 This project requires the following Python libraries:
-  opencv-python~=4.10.0.84
-  numpy~=2.1.3
-  mediapipe~=0.10.18
-  opencv-contrib-python~=4.10.0.84
+opencv-python~=4.10.0.84
+numpy~=2.1.3
+mediapipe~=0.10.18
+opencv-contrib-python~=4.10.0.84
 
 
 
