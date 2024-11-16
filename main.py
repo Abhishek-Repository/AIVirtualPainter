@@ -1,9 +1,10 @@
 import cv2
 import numpy as np
 import os
-import HandTrackingModule  # Assuming HandTrackingModule is your custom module
+import HandTrackingModule
 
 ##################################
+# Set the brush thickness and eraser thickness
 brush_thickness = 15
 eraser_thickness = 50
 ##################################
@@ -28,11 +29,14 @@ for imPath in myList:
 # Load select_color.png for color selection overlay
 select_color_overlay = overlayList[7]
 
+# Initialize the webcam capture
 cap = cv2.VideoCapture(0)
-cap.set(3, 1280)
-cap.set(4, 720)
+cap.set(3, 1280)  # Set the video capture width (1280 pixels)
+cap.set(4, 720)   # Set the video capture height (720 pixels)
 
+# Initialize the hand detector from the HandTrackingModule with a confidence threshold of 85%
 detector = HandTrackingModule.HandDetector(detectionCon=0.85)
+# Initialize previous x and y coordinates for hand tracking
 x_prev, y_prev = 0, 0
 # Creating a new canvas to draw
 img_canvas = cv2.imread(os.path.join(folderPath2, "background_img.jpg"), cv2.IMREAD_UNCHANGED)
@@ -41,6 +45,7 @@ print(img_canvas.shape)
 # Define x-coordinates for each color zone based on the selection_palette image
 zone_width = 183  # Approximate width of each color zone
 
+# Defining color zone positions
 color_zones = {
     (0 * zone_width, 1 * zone_width): overlayList[0],  # black
     (1 * zone_width, 2 * zone_width): overlayList[3],  # orange
@@ -51,6 +56,7 @@ color_zones = {
     (6 * zone_width, 7 * zone_width): overlayList[6],  # eraser
 }
 
+# Defining colors based on positions
 colors = [
     (89, 222, 255),  # Yellow (255, 222, 89)
     (77, 145, 255),  # RGB (255, 145, 77) -> BGR (77, 145, 255)
@@ -178,7 +184,7 @@ while True:
         img_canvas = img_canvas[:, :, :3]
     img_canvas = img_canvas.astype(np.uint8)  # Ensure dtype is uint8
 
-    # Display the result
+    # # Showing both img and canvas
     cv2.imshow("img", img)
     cv2.imshow("Canvas", img_canvas)
 
